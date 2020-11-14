@@ -1,5 +1,6 @@
 package org.techtown.accountbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +43,13 @@ public class InputFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fab_plus:
-                toggleFab();
+                toggleFab();    //fab 창 올라오는 애니메이션 실행
                 break;
             case R.id.fab_income:
-                toggleFab();    //애니메이션 실행 함수
+                openInputmenu(0);   // 0 는 income 입력 메뉴로
                 break;
             case R.id.fab_outcome:
-                toggleFab();
+                openInputmenu(1);   // 1은 outcome 입력 메뉴로
                 break;
         }
     }
@@ -57,23 +58,37 @@ public class InputFragment extends Fragment implements View.OnClickListener{
 
     //애니매이션 함수
     public void toggleFab(){
-        //fab가 열러있을때
+        //fab가 열려있을때 닫는 기능
         if (isFabOpen) {
-            fab_plus.setImageResource(R.drawable.open);
+            fab_plus.setImageResource(R.drawable.open); //fab 이미지 설정
             Animation anim = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);  //fab_close 불러옴
-            fab_income.startAnimation(anim);
-            fab_outcome.startAnimation(anim);
-            fab_income.setClickable(false);
+            fab_income.startAnimation(anim);    // income fab 열림
+            fab_outcome.startAnimation(anim);   // outcome fab 열림
+            fab_income.setClickable(false);     // 클릭 불가
             fab_outcome.setClickable(false);
             isFabOpen = false;
-        } else {    //fab 닫혀있을때
+        } else {    //fab 닫혀있을때 여는 기능
             fab_plus.setImageResource(R.drawable.close);
             Animation anim = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_open);   //fab_open 불러옴
             fab_income.startAnimation(anim);
             fab_outcome.startAnimation(anim);
-            fab_income.setClickable(true);
+            fab_income.setClickable(true);  // 클릭 가능
             fab_outcome.setClickable(true);
             isFabOpen = true;
+        }
+    }
+
+    public void openInputmenu(int option){
+        switch (option){
+            //income
+            case 0:
+                Intent intent1 = new Intent(getActivity(), Income_menu.class);
+                startActivityForResult(intent1,101);
+                break;
+            //outcome
+            case 1:
+                Intent intent2 = new Intent(getActivity(),Outcome_menu.class);
+                startActivityForResult(intent2,102);
         }
     }
 }
