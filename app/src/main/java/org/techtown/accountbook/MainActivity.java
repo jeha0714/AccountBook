@@ -1,7 +1,6 @@
 package org.techtown.accountbook;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +8,9 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-    CalenderFragment calenderFragment;
+    CalendarFragment calendarFragment;
     InputFragment inputFragment;
 
     Spinner sp_main;    //날짜 달력 스피너
@@ -46,13 +45,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //나열 달력 fragment 변환
-    public void setFlags(int position){
+    //나열과 달력의 fragment 변환
+    public void setFlags(int position) {
         switch (position){
+            //open calendarFragment
             case 0:
-                calenderFragment = new CalenderFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.mainframe,calenderFragment).commit();
+                calendarFragment = new CalendarFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainframe,calendarFragment).commit();
                 break;
+            //open inputFragment
             case 1:
                 inputFragment = new InputFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainframe,inputFragment).commit();
@@ -60,3 +61,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+

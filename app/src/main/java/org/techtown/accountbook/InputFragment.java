@@ -80,15 +80,16 @@ public class InputFragment extends Fragment implements View.OnClickListener{
 
     public void openInputmenu(int option){
         switch (option){
-            //income
+            //go to income_menu
             case 0:
                 Intent intent1 = new Intent(getActivity(), Income_menu.class);
                 startActivityForResult(intent1,101);
                 break;
-            //outcome
+            //go to outcome_menu
             case 1:
-                Intent intent2 = new Intent(getActivity(),Outcome_menu.class);
+                Intent intent2 = new Intent(getActivity(), Outcome_menu.class);
                 startActivityForResult(intent2,102);
+                break;
         }
     }
 }
