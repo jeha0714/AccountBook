@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +21,9 @@ import java.security.acl.Group;
 
 public class InputFragment extends Fragment implements View.OnClickListener{
 
-    //floating-action-bar
     FloatingActionButton fab_plus, fab_income,fab_outcome;
+    TextView tv_day2;     //calendar로 부터 넘겨받은 날짜 저장
+
 
     @Nullable
     @Override

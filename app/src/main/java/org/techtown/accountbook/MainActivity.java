@@ -1,10 +1,14 @@
 package org.techtown.accountbook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CalendarView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -12,6 +16,8 @@ public class MainActivity extends AppCompatActivity{
 
     CalendarFragment calendarFragment;
     InputFragment inputFragment;
+    LinearLayout floating_view;
+    long backBthTime = 0;
 
     Spinner sp_main;    //날짜 달력 스피너
 
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+
     }
 
     //나열과 달력의 fragment 변환
@@ -60,6 +67,26 @@ public class MainActivity extends AppCompatActivity{
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBthTime;
+
+
+        if(0 <= gapTime && 2000 >= gapTime){
+            super.onBackPressed();
+        }else{
+            if(floating_view.getVisibility() == View.VISIBLE){
+                floating_view.setVisibility(View.INVISIBLE);
+            }
+            backBthTime = curTime;
+            Toast.makeText(this, "한번더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }
 
 
