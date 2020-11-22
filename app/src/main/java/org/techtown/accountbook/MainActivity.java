@@ -14,6 +14,36 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
+    private Spinner moneySpinner;
+    private Spinner graphSpinner;
+
+    private final String[] graphChoose = {"원그래프", "막대그래프", "나열"};
+    private final String[] moneyShowChoose = {"전체", "잔액", "지출", "수입", "수입&지출"};
+
+    //막대그래프 표현 필드
+    private LinearLayout graph_bar_and_moneyAll;
+    private LinearLayout graph_bar_and_moneyBalance;
+    private LinearLayout graph_bar_and_moneySpending;
+    private LinearLayout graph_bar_and_moneyIncome;
+    private LinearLayout graph_bar_and_moneyIncomeandSpending;
+
+    //나열 표현 필드
+    private LinearLayout graph_list_and_moneyAll;
+    private LinearLayout graph_list_and_moneyBalance;
+    private LinearLayout graph_list_and_moneySpending;
+    private LinearLayout graph_list_and_moneyIncome;
+    private LinearLayout graph_list_and_moneyIncomeandSpending;
+
+    //원그래프 표현 필드
+    private LinearLayout graph_circle_and_moneyAll;
+    private LinearLayout graph_circle_and_moneyBalance;
+    private LinearLayout graph_circle_and_moneySpending;
+    private LinearLayout graph_circle_and_moneyIncome;
+    private LinearLayout graph_circle_and_moneyIncomeandSpending;
+
+    private int graphNum;
+    private int moneyNum;
+
     CalendarFragment calendarFragment;
     InputFragment inputFragment;
     LinearLayout floating_view;
@@ -25,6 +55,314 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        graph_bar_and_moneyAll = findViewById(R.id.graph_bar_and_moneyAll);
+        graph_bar_and_moneyBalance = findViewById(R.id.graph_bar_and_moneyBalance);
+        graph_bar_and_moneySpending = findViewById(R.id.graph_bar_and_moneySpending);
+        graph_bar_and_moneyIncome = findViewById(R.id.graph_bar_and_moneyIncome);
+        graph_bar_and_moneyIncomeandSpending = findViewById(R.id.graph_bar_and_moneyIncomeandSpending);
+
+        graph_list_and_moneyAll = findViewById(R.id.graph_list_and_moneyAll);
+        graph_list_and_moneyBalance = findViewById(R.id.graph_list_and_moneyBalance);
+        graph_list_and_moneySpending = findViewById(R.id.graph_list_and_moneySpending);
+        graph_list_and_moneyIncome = findViewById(R.id.graph_list_and_moneyIncome);
+        graph_list_and_moneyIncomeandSpending = findViewById(R.id.graph_list_and_moneyIncomeandSpending);
+
+        graph_circle_and_moneyAll = findViewById(R.id.graph_circle_and_moneyAll);
+        graph_circle_and_moneyBalance = findViewById(R.id.graph_circle_and_moneyBalance);
+        graph_circle_and_moneySpending = findViewById(R.id.graph_circle_and_moneySpending);
+        graph_circle_and_moneyIncome = findViewById(R.id.graph_circle_and_moneyIncome);
+        graph_circle_and_moneyIncomeandSpending = findViewById(R.id.graph_circle_and_moneyIncomeandSpending);
+
+
+        moneySpinner = findViewById(R.id.moneySpinner);
+
+        moneySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                moneyNum = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+
+        // 위는 돈 목록 아래는 그래프 .
+
+
+        graphSpinner = findViewById(R.id.graphSpinner);
+
+        graphSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                graphNum = position;
+
+                if (graphChoose[graphNum].equals("원그래프") && moneyShowChoose[moneyNum].equals("전체")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.VISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("원그래프") && moneyShowChoose[moneyNum].equals("잔액")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.VISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("원그래프") && moneyShowChoose[moneyNum].equals("지출")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.VISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("원그래프") && moneyShowChoose[moneyNum].equals("수입")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.VISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("원그래프") && moneyShowChoose[moneyNum].equals("수입&지출")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.VISIBLE);
+                }
+
+
+
+                if (graphChoose[graphNum].equals("막대그래프") && moneyShowChoose[moneyNum].equals("전체")) {
+                    graph_bar_and_moneyAll.setVisibility(View.VISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("막대그래프") && moneyShowChoose[moneyNum].equals("잔액")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.VISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("막대그래프") && moneyShowChoose[moneyNum].equals("지출")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.VISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("막대그래프") && moneyShowChoose[moneyNum].equals("수입")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.VISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("막대그래프") && moneyShowChoose[moneyNum].equals("수입&지출")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.VISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+
+                if (graphChoose[graphNum].equals("나열") && moneyShowChoose[moneyNum].equals("전체")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.VISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("나열") && moneyShowChoose[moneyNum].equals("잔액")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.VISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("나열") && moneyShowChoose[moneyNum].equals("지출")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.VISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("나열") && moneyShowChoose[moneyNum].equals("수입")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.VISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+                if (graphChoose[graphNum].equals("나열") && moneyShowChoose[moneyNum].equals("수입&지출")) {
+                    graph_bar_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_bar_and_moneyIncomeandSpending.setVisibility(View.VISIBLE);
+                    graph_list_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_list_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyAll.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyBalance.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneySpending.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
+                    graph_circle_and_moneyIncomeandSpending.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+
+        });
 
         sp_main = findViewById(R.id.sp_main);
         //스피너 값에 따른 fragment 변환

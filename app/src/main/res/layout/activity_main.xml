@@ -6,6 +6,8 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,9 +15,179 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="120dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/graphSpinner"
+                android:layout_width="122dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="20dp"
+                android:entries="@array/chooseHowGraph"
+                android:outlineSpotShadowColor="#050505">
+
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/moneySpinner"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="290dp"
+                android:entries="@array/chooseWhatShow">
+
+            </Spinner>
+
+            <FrameLayout
+                android:layout_width="370dp"
+                android:layout_height="240dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/graph_bar_and_moneyAll"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_bar_and_moneyBalance"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_bar_and_moneySpending"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_bar_and_moneyIncome"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_bar_and_moneyIncomeandSpending"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+
+
+                <LinearLayout
+                    android:id="@+id/graph_list_and_moneyAll"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_list_and_moneyBalance"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_list_and_moneySpending"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_list_and_moneyIncome"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_list_and_moneyIncomeandSpending"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+
+
+                <LinearLayout
+                    android:id="@+id/graph_circle_and_moneyAll"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="visible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_circle_and_moneyBalance"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_circle_and_moneySpending"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_circle_and_moneyIncome"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/graph_circle_and_moneyIncomeandSpending"
+                    android:background="#0C0C0C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"/>
+
+            </FrameLayout>
+
+
+
+
 
         </LinearLayout>
 

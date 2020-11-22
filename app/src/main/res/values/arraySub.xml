@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="chooseWhatShow" >
+        <item>전체</item>
+        <item>잔액</item>
+        <item>지출</item>
+        <item>수입</item>
+        <item>수입&amp;지출</item>
+
+
+    </string-array>
+
+    <string-array name="chooseHowGraph" >
+        <item>원그래프</item>
+        <item>막대그래프</item>
+        <item>나열</item>
+
+
+    </string-array>
+
+
+</resources>
