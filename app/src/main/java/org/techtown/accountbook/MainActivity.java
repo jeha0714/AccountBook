@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CalendarView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Handler;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private Spinner moneySpinner;
     private Spinner graphSpinner;
@@ -44,6 +47,20 @@ public class MainActivity extends AppCompatActivity{
     private int graphNum;
     private int moneyNum;
 
+    //세미씨 코드
+    private ProgressBar pieChart1;
+    private ProgressBar pieChart2;
+    private ProgressBar pieChart3;
+
+    private TextView status_number1;
+    private TextView status_number2;
+    private TextView status_number3;
+
+    private TextView cash_number1;
+    private TextView cash_number2;
+    private TextView cash_number3;
+    //세미씨 코드
+
     CalendarFragment calendarFragment;
     InputFragment inputFragment;
     LinearLayout floating_view;
@@ -55,6 +72,26 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pieChart1 = (ProgressBar)findViewById(R.id.status_progressbar1);
+        pieChart2 = (ProgressBar)findViewById(R.id.status_progressbar2);
+        pieChart3 = (ProgressBar)findViewById(R.id.status_progressbar3);
+
+        status_number1= (TextView)findViewById(R.id.status_number1);
+        status_number2 = (TextView)findViewById(R.id.status_number2);
+        status_number3 = (TextView)findViewById(R.id.status_number3);
+
+        cash_number1 = (TextView)findViewById(R.id.cash_number1);
+        cash_number2 = (TextView)findViewById(R.id.cash_number2);
+        cash_number3 = (TextView) findViewById(R.id.cash_number3);
+
+        pieChart1.setProgress(0);
+        pieChart2.setProgress(0);
+        pieChart3.setProgress(0);
+
+        //버튼클릭함수(resultonactivity))반영{  }
+//        cashUpdate(10000, 2000, 2000);  //금액 먼저 업데이트후 차트 업데이트
+        updateChart();
 
         graph_bar_and_moneyAll = findViewById(R.id.graph_bar_and_moneyAll);
         graph_bar_and_moneyBalance = findViewById(R.id.graph_bar_and_moneyBalance);
@@ -84,7 +121,8 @@ public class MainActivity extends AppCompatActivity{
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
 
@@ -183,7 +221,6 @@ public class MainActivity extends AppCompatActivity{
                     graph_circle_and_moneyIncome.setVisibility(View.INVISIBLE);
                     graph_circle_and_moneyIncomeandSpending.setVisibility(View.VISIBLE);
                 }
-
 
 
                 if (graphChoose[graphNum].equals("막대그래프") && moneyShowChoose[moneyNum].equals("전체")) {
@@ -360,7 +397,8 @@ public class MainActivity extends AppCompatActivity{
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
 
         });
 
@@ -369,7 +407,7 @@ public class MainActivity extends AppCompatActivity{
         sp_main.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0: //0 is calender
                         setFlags(0);    //fragment 바꿔주는 함수
                         break;
@@ -377,7 +415,7 @@ public class MainActivity extends AppCompatActivity{
                         setFlags(1);
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
                         break;
                 }
             }
@@ -392,16 +430,16 @@ public class MainActivity extends AppCompatActivity{
 
     //나열과 달력의 fragment 변환
     public void setFlags(int position) {
-        switch (position){
+        switch (position) {
             //open calendarFragment
             case 0:
                 calendarFragment = new CalendarFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.mainframe,calendarFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, calendarFragment).commit();
                 break;
             //open inputFragment
             case 1:
                 inputFragment = new InputFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.mainframe,inputFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, inputFragment).commit();
                 break;
         }
     }
@@ -413,18 +451,113 @@ public class MainActivity extends AppCompatActivity{
         long gapTime = curTime - backBthTime;
 
 
-        if(0 <= gapTime && 2000 >= gapTime){
+        if (0 <= gapTime && 2000 >= gapTime) {
             super.onBackPressed();
-        }else{
-            if(floating_view.getVisibility() == View.VISIBLE){
+        } else {
+            if (floating_view.getVisibility() == View.VISIBLE) {
                 floating_view.setVisibility(View.INVISIBLE);
             }
             backBthTime = curTime;
-            Toast.makeText(this, "한번더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "한번더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    public void cashUpdate(int a, int b, int c){
+
+        int currentCash = a;
+        int inputCash = b;
+        int outputCash = c;
+
+        int i_percent = 0;
+        int o_percent = 0;
+
+        i_percent = (inputCash / currentCash) * 100;
+        o_percent = (outputCash / currentCash) * 100;
+
+        cash_number1.setText(currentCash);   //잔액, 수입, 지출 새로 업데이트
+        cash_number2.setText(inputCash);
+        cash_number3.setText(outputCash);
+
+
+        cash_number1.setText(currentCash + inputCash);//지출하고 수입에 변화가 있을시..
+        cash_number1.setText(currentCash - outputCash);
+
+        //넘버 1은 항상 100으로 설정
+        status_number2.setText(i_percent);
+        status_number3.setText(o_percent);
+
+
+    }
+
+    public void updateChart(){
+
+        progress(100);  //퍼센트 계산해서 넘겨주기
+
+    }
+
+    //동시에..
+    public void progress(final int value){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0; i <= value ; i++) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    final int percent = i;
+                    status_number1.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            pieChart1.setProgress(percent);
+                            status_number1.setText(percent + "%");
+                        }
+                    });
+                }
+
+                for(int i = 0; i <= 20 ; i++) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    final int percent = i;
+                    status_number2.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            pieChart2.setProgress(percent);
+                            status_number2.setText(percent + "%");
+                        }
+                    });
+                }
+
+                for(int i = 0; i <= 80 ; i++) {  //익명클래스,
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    final int percent = i;
+                    status_number3.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            pieChart3.setProgress(percent);
+                            status_number3.setText(percent + "%");
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+
+
 }
+
 
 
